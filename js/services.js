@@ -1,11 +1,12 @@
-angular.module('BankLocator',[])
-.factory('Locator', ['$http', function($http){
+// var app = angular.module('BankLocator',[]);
 
-  var url = 'https://google.com/aindioasndoiasndoas';
-  return {
-    get: function (cb) {
-      return $http.get(url)
-        .success(cb)
-    }
-  };
-}]);
+// app.factory('Locator', ['$http', function($http){
+
+//   var url = 'https://google.com/aindioasndoiasndoas';
+//   return {
+//     get: function (cb) {
+//       return $http.get(url)
+//         .success(cb)
+//     }
+//   };
+// }]);
