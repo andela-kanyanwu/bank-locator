@@ -1,18 +1,27 @@
-// var app = angular.module('BankSearch',[]);
+// // var app = angular.module('BankSearch',[]);
 
-// app.factory('locator', ['$http', '$rootScope', function($http, $rootScope){
-//   var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json'
-//   var data = {
-//     location: $rootScope.currPosition.lat + ',' + $rootScope.currPosition.lng,
-//     radius: '500',
-//     types: 'bank',
-//     key: 'AIzaSyCu-MS1i1v3KAhX33xu0UdMJDHsEfsPt7o'
-//   }
-  
-//   $http.get(url, data).
-//     success(function(response){
-//       console.log(response);
+// // app.factory('locator', ['$http', function($http){
+
+// // }])
+
+
+//     $http({
+//       method: 'GET',
+//       url: 'https://api.foursquare.com/v2/venues/search',
+//       params: {
+//         client_id: "BCFWS4SVPQBUKM4EEODKUYWVROZNIIVQ35ZOTAUOSL3HCDF4",
+//         client_secret: "14LEMG1H3AVUFQHFTNE4DR13JNDNSJJY4TX2YRXCAUN500P5",
+//         v: "20130815",
+//         ll: lat + "," + lng,
+//         query: "bank"
+//       }
+//     }).
+//     success(function(reply){
+//       console.log("name: ", reply.response.venues[0].name);
+//       console.log("address: ", reply.response.venues[0].location.address);
+//       console.log("city: ", reply.response.venues[0].location.city);
+//       console.log(reply.response.venues)
 //     })
-// }])
-
-// 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=6.5067666,3.3784109&radius=500&types=bank&key=AIzaSyCu-MS1i1v3KAhX33xu0UdMJDHsEfsPt7o'
+//     .error( function( err, status){
+//       console.log( err, status);
+//     });
