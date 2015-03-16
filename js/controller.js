@@ -3,51 +3,23 @@ var app = angular.module('BankLocator', ['uiGmapgoogle-maps']);
 app.controller('MainController', ['$scope', '$window', '$log', '$timeout', '$http', function($scope, $window, $log, $timeout, $http) {
 
   //Gets user's current location to load the map
-  window.navigator.geolocation.getCurrentPosition(function (response){
+  window.navigator.geolocation.getCurrentPosition(function(response) {
     var lat = response.coords.latitude,
-        lng = response.coords.longitude;
-        console.log(lat, lng);
-    //To get the value of the latitude and longitude available anywhere in the app
-    // $rootScope.currPosition = {lat: lat, lng: lng};
+      lng = response.coords.longitude;
 
-  //loads the map
-    $scope.map = { 
+    //loads the map
+    $scope.map = {
       center: {
-        latitude: lat, 
+        latitude: lat,
         longitude: lng
-      }, 
-      zoom: 16 
+      },
+      zoom: 15
     };
 
-    //sets the marker
-    $scope.marker = {
-      coords: {
-        latitude: lat, 
-        longitude: lng
-      },
-      options: { 
-        draggable: true 
-      },
-      id: 0,
-      events: {
-        dragend: function (marker, eventName, args) {
-          $log.log('marker dragend');
-          var lat = marker.getPosition().lat();
-          var lon = marker.getPosition().lng();
-          // $log.log(lat);
-          // $log.log(lon);
+    //Get the marker points in an array
+    var createMarkers = [];
 
-          $scope.marker.options = {
-            draggable: true,
-            // labelContent: "lat: " + $scope.marker.coords.latitude + ' ' + 'lon: ' + $scope.marker.coords.longitude,
-            labelAnchor: "100 0",
-            labelClass: "marker-labels"
-          };
-        }
-      }
-    }
-
-    $timeout(function(){});
+    $scope.markers = createMarkers;
 
     $http({
       method: 'GET',
@@ -60,14 +32,22 @@ app.controller('MainController', ['$scope', '$window', '$log', '$timeout', '$htt
         query: "bank"
       }
     }).
-    success(function(reply){
-      console.log("name: ", reply.response.venues[0].name);
-      console.log("address: ", reply.response.venues[0].location.address);
-      console.log("city: ", reply.response.venues[0].location.city);
-      $scope.banks = reply.response.venues
-    })
-    .error( function( err, status){
-      console.log( err, status);
+    success(function(reply) {
+      $scope.banks = reply.response.venues;
+
+      var len = reply.response.venues.length;
+      for (var i = 0; i < len; i++) {
+        createMarkers.push({
+          latitude: reply.response.venues[i].location.lat,
+          longitude: reply.response.venues[i].location.lng,
+          id: i
+        });
+      }
+    }).
+    error(function(err, status) {
+      console.log(err, status);
     });
-  })
+  });
+
+  $timeout(function() {});
 }]);

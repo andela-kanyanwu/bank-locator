@@ -11,15 +11,12 @@
   </head>
 
   <body ng-controller="MainController">
-   <!--  <form ng-submit="search">
-      <input type="text" />
-      <button type="submit">Search</button>
-    </form> -->
     <h2>Find nearest bank</h2>
+    
     <!--The map is displayed here-->  
     <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-      <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-      </ui-gmap-marker>
+      <ui-gmap-markers models="markers" coords="'self'" click="">
+      </ui-gmap-markers>
     </ui-gmap-google-map>
     <div ng-repeat="bank in banks">
       <div>
