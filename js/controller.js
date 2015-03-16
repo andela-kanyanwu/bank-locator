@@ -36,10 +36,18 @@ app.controller('MainController', ['$scope', '$window', '$log', '$timeout', '$htt
       $scope.banks = reply.response.venues;
 
       var len = reply.response.venues.length;
+      var markerTitle = "";
       for (var i = 0; i < len; i++) {
+        if (reply.response.venues[i].location.address === undefined) {
+          markerTitle = reply.response.venues[i].name; 
+        }
+        else {
+          markerTitle = reply.response.venues[i].name + ", " + reply.response.venues[i].location.address;
+        }
         createMarkers.push({
           latitude: reply.response.venues[i].location.lat,
           longitude: reply.response.venues[i].location.lng,
+          title: markerTitle,
           id: i
         });
       }

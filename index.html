@@ -12,10 +12,13 @@
 
   <body ng-controller="MainController">
     <h2>Find nearest bank</h2>
-    
+
     <!--The map is displayed here-->  
     <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-      <ui-gmap-markers models="markers" coords="'self'" click="">
+      <ui-gmap-markers models="markers" coords="'self'">
+        <ui-gmap-windows show="show">
+          <div ng-non-bindable>{{title}}</div>
+        </ui-gmap-windows>
       </ui-gmap-markers>
     </ui-gmap-google-map>
     <div ng-repeat="bank in banks">
