@@ -1,35 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="BankLocator">
 
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="styles/main.css">
-    <link rel="stylesheet" type="text/css" href="styles/bootstrap-3.3.2-dist/css/bootstrap.css">
-    <script src="lib/angular.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controller.js"></script>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <link rel="stylesheet" type="text/css" href="styles/bootstrap-3.3.2-dist/css/bootstrap.css">
+  <script src="lib/angular.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controller.js"></script>
+</head>
 
-  <body ng-controller="MainController">
-    <h2>Find nearest bank</h2>
-
-    <!--The map is displayed here-->  
-    <ui-gmap-google-map center='map.center' zoom='map.zoom'>
-      <ui-gmap-markers models="markers" coords="'self'">
-        <ui-gmap-windows show="show">
-          <div ng-non-bindable>{{title}}</div>
-        </ui-gmap-windows>
-      </ui-gmap-markers>
-    </ui-gmap-google-map>
-    <div ng-repeat="bank in banks">
-      <div>
-        <p>{{bank.name}}</p>
-        <p>{{bank.location.address}}</p>
-        <p>{{bank.location.city}}</p>
+<body ng-controller="MainController">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid" id="page-header">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <div>
+          <h1 id="h1-text">Nearest Bank Finder App</h1>
+          <span id="header-line-text">...See banks around you whenerever you are</span>
+        </div>
       </div>
     </div>
-    <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
-    <script src='lib/lodash.js'></script>
-    <script src='lib/angular-google-maps.js'></script>
-  </body>
+    <!-- /.container-fluid -->
+  </nav>
+
+  <!--page body-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <!--The map is displayed here-->
+        <div class="col-md-8">
+          <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+            <ui-gmap-markers models="markers" coords="'self'">
+              <ui-gmap-windows show="show">
+                <div ng-non-bindable>{{title}}</div>
+              </ui-gmap-windows>
+            </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>
+        <!--List of banks is displayed here-->
+        <div class="col-md-4 bankList">
+          <div ng-repeat="bank in banks">
+            <div>
+              <ul class="list-group">
+                <li class="list-group-item" ng-hide="bank.name === undefined">{{bank.name}}</li>
+                <li class="list-group-item" ng-hide="bank.location.address === undefined">{{bank.location.address}}</li>
+                <li class="list-group-item" ng-hide="bank.location.city === undefined">{{bank.location.city}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
+  <script src='lib/lodash.js'></script>
+  <script src='lib/angular-google-maps.js'></script>
+</body>
+
 </html>

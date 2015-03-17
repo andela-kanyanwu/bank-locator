@@ -1,11 +1,8 @@
-/*#mapArea {
-  height: 500px; 
-  width: 400px;
-  margin: 0; 
-  padding: 0;
-}*/
-
 .angular-google-map-container { 
-  height: 400px; 
-  width: 70%;
+  height: 600px; 
+  width: 100%;
+}
+.bankList {
+  height: 600px;
+  overflow: scroll;
 }
